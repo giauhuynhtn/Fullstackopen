@@ -206,18 +206,17 @@ const App = () => {
   const Part = (props) => {
     return (
       <p>
-        {props.name} {props.exercises}
+        {props.content.name} {props.content.exercises}
       </p>
     )
   };
 
   const Content = (props) => {
-    
     return (
       <div>
-        <Part name={props.parts[0].name} exercises={props.parts[0].exercises}/>
-        <Part name={props.parts[1].name} exercises={props.parts[1].exercises}/>
-        <Part name={props.parts[2].name} exercises={props.parts[2].exercises}/>
+        <Part content={props.p[0]}/>
+        <Part content={props.p[1]}/>
+        <Part content={props.p[2]}/>
       </div>
     )
   };
@@ -234,7 +233,7 @@ const App = () => {
   return (
     <div>
        <Header course = {course}/>
-       <Content parts={parts} />
+       <Content p={parts} />
        <Total parts={parts} />    
   </div>
   )
