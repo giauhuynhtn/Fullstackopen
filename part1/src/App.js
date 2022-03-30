@@ -1,46 +1,3 @@
-// import parse from 'html-react-parser'
-
-// const Content = (props) => {
-//   const total = 31
-//   console.log(total)
-//   const content = props.parts.map(v => `<p>${v.name} ${v.exercises}</p>`).join('')
-//   return (
-//     `<div>
-//       <h1>${props.name}</h1>
-//       ${content}
-//       <p>Number of courses is ${total}</p>
-//     </div>`
-//   )
-// }
-
-// const App = () => {
-//   const course = {
-//     name: 'Half Stack application development',
-//     parts: [
-//       {
-//         name: 'Fundamentals of React',
-//         exercises: 10
-//       },
-//       {
-//         name: 'Using props to pass data',
-//         exercises: 7
-//       },
-//       {
-//         name: 'State of a component',
-//         exercises: 14
-//       }
-//     ]
-//   }
-//   const htmlString=Content(course)
-
-//   return (
-//     <div>
-//       {parse(htmlString)}  
-//     </div>
-//   )
-// }
-
-// export default App
 
 //=============== EX 1.1-1.2
 // const App = () => {
@@ -59,7 +16,7 @@
 //       </h1>
 //     )
 //   }
-// //ex 1.1
+// //-------------ex 1.1-------------
 //   const Content = (props) => {
 //     return (
 //       <>
@@ -77,7 +34,7 @@
 //   }
 
   
-// //ex 1.2
+// // -------------ex 1.2-------------
 //   const Content1 = (props) => {
 //     const Part = (props) => {
 //       return (
@@ -119,8 +76,7 @@
 
 // export default App
 
-//======Ex 1.3-1.5
-// EX 1.3 -----
+// -------------Ex 1.3 -------------
 
 // const App = () => {
 //   const course = 'Half Stack application development'
@@ -180,7 +136,7 @@
 
 // export default App
 
-//====== Ex 1.4 =====
+//------------- Ex 1.4 -------------
 
 // const App = () => {
 //   const course = 'Half Stack application development'
@@ -241,7 +197,7 @@
 
 // export default App
 
-// ==== Ex 1.5 ===
+// ----------- Ex 1.5 -------------
 
 const App = () => {
   const course = {
