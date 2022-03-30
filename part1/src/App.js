@@ -206,7 +206,7 @@ const App = () => {
   const Part = (props) => {
     return (
       <p>
-        {props[].name} {props.part.exercises}
+        {props.name} {props.exercises}
       </p>
     )
   };
@@ -215,9 +215,9 @@ const App = () => {
     
     return (
       <div>
-        <Part name={props[0]} exercises={props[0]}/>
-        <Part name={props[1]} exercises={props[1]}/>
-        <Part name={props[2]} exercises={props[2]}/>
+        <Part name={props.parts[0].name} exercises={props.parts[0].exercises}/>
+        <Part name={props.parts[1].name} exercises={props.parts[1].exercises}/>
+        <Part name={props.parts[2].name} exercises={props.parts[2].exercises}/>
       </div>
     )
   };
@@ -234,7 +234,7 @@ const App = () => {
   return (
     <div>
        <Header course = {course}/>
-       {/* <Content props={parts} /> */}
+       <Content parts={parts} />
        <Total parts={parts} />    
   </div>
   )
