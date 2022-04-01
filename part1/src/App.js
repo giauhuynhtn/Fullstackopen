@@ -259,9 +259,29 @@
 //   )
 // }
 
-//Ex6
+//Ex1.9
 
 import {useState} from 'react'
+
+const Statistics = ({good, neutral, bad}) => {
+  let positive = 0
+  let result = <p></p>
+  if ((good + bad + neutral) !== 0) {positive = good/(good + bad + neutral)}
+    else {positive = 0}
+  if (good + bad + neutral === 0) {return result = <p>no feedback given</p>} 
+  else { return result = (
+      <p>
+        good {good} <br/>
+        neutral {neutral} <br/>
+        bad {bad} <br/>
+        all {good + bad + neutral} <br/>
+        average {good - bad} <br/>
+        positive {positive} %
+      </p>
+    )
+  }
+  return result
+}
 
 const App = () => {
   // save clicks of each button to its own state
@@ -281,6 +301,7 @@ const App = () => {
     console.log('Customer chooses bad')
     setBad(bad + 1)
   }
+  
   return (
     <div>
       <h1>give feedback</h1>
@@ -290,11 +311,7 @@ const App = () => {
         <button onClick={badHandler}>bad</button>
       </p>
       <h2>statistics</h2>
-      <p>
-        good {good} <br/>
-        neutral {neutral} <br/>
-        bad {bad}
-      </p>
+      < Statistics good={good} neutral={neutral} bad={bad}/>
     </div>
   )
 }
