@@ -259,30 +259,48 @@
 //   )
 // }
 
-//--------Ex1.10---------
+//--------Ex1.11---------
 
 import {useState} from 'react'
 
-const StatisticLine = ({text,value}) => {
+const StatisticTable = ({value}) => {
   const {good, neutral, bad} = value
-  let average = 0
   let total = good + bad + neutral
-  let result = <p></p>
-  if (total === 0) {result = <p>no feedback</p>}
-  else if (total > 0) {
-    if (text==='good') {
-      average = good/total
-      result = <p>{text} average {average}</p>
-    }
-    else if (text==='bad') {
-      average = bad/total
-      result = <p>{text} average {average}</p>
-    }
-    else if (text==='neutral') {
-      average = neutral/total
-      result = <p>{text} average {average}</p>
-    }
-  }
+  let average = (good + bad)/total
+  let positive = good/total
+  console.log(total)
+  let result = <p>no feedback</p>
+  if (total > 0) {result = (
+      <table>
+        <tbody>
+          <tr>
+            <td>good</td>
+            <td>{good}</td>
+          </tr>
+          <tr>
+            <td>neutral</td>
+            <td>{neutral}</td>
+          </tr>
+          <tr>
+            <td>bad</td>
+            <td>{bad}</td>
+          </tr>
+          <tr>
+            <td>all</td>
+            <td>{total}</td>
+          </tr>
+          <tr>
+            <td>average</td>
+            <td>{average}</td>
+          </tr>
+          <tr>
+            <td>positive</td>
+            <td>{positive} %</td>
+          </tr>
+        </tbody>
+      </table>
+  )}
+  
   return result
 }
 const Button = ({text, onclick}) => <button onClick={onclick}>{text}</button>
@@ -311,9 +329,7 @@ const App = () => {
   return (
     <div>
       <h1>give feedback</h1>
-      <StatisticLine text="good" value ={value} />
-      <StatisticLine text="neutral" value ={value} />
-      <StatisticLine text="bad" value ={value} />
+      <StatisticTable value ={value} />
       <p>
         <Button onclick={goodHandler} text='good'/>
         <Button onclick={neutralHandler} text='neutral'/>
