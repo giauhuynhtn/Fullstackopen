@@ -342,7 +342,7 @@
 
 // export default App
 
-// ------- 1.12 * ------------
+// ------- 1.13 * ------------
 import {useState} from 'react'
 
 const getRandomInt = (max) => Math.floor(Math.random() * max)
@@ -359,6 +359,14 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
+  const [voted, setVoted] = useState(new Uint8Array(7))
+  
+  const votedHandle = () => {
+    const copy = [...voted]
+    copy[selected] += 1
+    console.log('voted list', copy)
+    setVoted(copy)
+  }
 
   const selectHandle = () => {
     let number = getRandomInt(anecdotes.length)
@@ -369,7 +377,10 @@ const App = () => {
     <div>
       {anecdotes[selected]} 
       <br/>
+      has {voted[selected]} votes.
+      <br/>
       <button onClick={selectHandle}>next anecdote</button>
+      <button onClick={votedHandle}>vote</button>
     </div>
   )
 }
