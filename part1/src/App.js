@@ -347,6 +347,12 @@ import {useState} from 'react'
 
 const getRandomInt = (max) => Math.floor(Math.random() * max)
 
+const MostVoted = ({votedArray,anecdotes}) => {
+  const indexOfMostVoted = (element) => element === Math.max(...votedArray)
+  let index = votedArray.findIndex(indexOfMostVoted)
+  return <p>{anecdotes[index]}</p>
+}
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often',
@@ -373,14 +379,15 @@ const App = () => {
     if (number === selected) {number = getRandomInt(anecdotes.length)}
     else (setSelected(number))
   }
+
   return (
     <div>
-      {anecdotes[selected]} 
-      <br/>
-      has {voted[selected]} votes.
-      <br/>
+      <h1>Anecdote of the day</h1>
+      <p>{anecdotes[selected]}<br/>has {voted[selected]} votes.</p>
       <button onClick={selectHandle}>next anecdote</button>
       <button onClick={votedHandle}>vote</button>
+      <h2>Anecdote with most votes</h2>
+      <MostVoted votedArray={voted} anecdotes={anecdotes}/>
     </div>
   )
 }
