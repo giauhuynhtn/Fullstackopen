@@ -342,7 +342,7 @@
 
 // export default App
 
-// ------- 1.13 * ------------
+// ------- 1.14 * ------------
 import {useState} from 'react'
 
 const getRandomInt = (max) => Math.floor(Math.random() * max)
