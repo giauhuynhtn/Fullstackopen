@@ -6,4 +6,5 @@ const Content = ({ part }) => {
   )
 }
 
+
 export default Content

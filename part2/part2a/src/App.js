@@ -1,3 +1,4 @@
+// ex 2.3*
 import Content from './components/Content'
 
 const App = () => {
