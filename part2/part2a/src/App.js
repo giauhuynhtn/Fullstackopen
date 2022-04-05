@@ -19,6 +19,11 @@ const App = () => {
         name: 'State of a component',
         exercises: 14,
         id: 3
+      },
+      {
+        name: 'Redux',
+        exercises: 11,
+        id: 4
       }
     ]
   }
@@ -29,6 +34,9 @@ const App = () => {
       {course.parts.map(part => (
         <Content key={part.id} part={part} />
       ))}
+      <p>
+        Total of {course.parts.reduce((acc, part) => {return acc + part.exercises},0)} exercises
+      </p>
     </div>
   )
 }
