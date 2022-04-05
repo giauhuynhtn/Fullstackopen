@@ -31,7 +31,7 @@ const App = () => {
 
   return (
     <div>
-      <h1>Half Stack application development</h1>
+      <h1>{course.name}</h1>
       {course.parts.map(part => (
         <Content key={part.id} part={part} />
       ))}
