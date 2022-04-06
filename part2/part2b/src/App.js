@@ -1,15 +1,8 @@
 import { useState } from 'react'
+import Filter from './components/Filter'
+import PersonForm from './components/PersonForm'
+import Persons from './components/Persons'
 
-const ShowNumbers = ({newFilter, persons}) => {
-  if (newFilter==='') {
-    return persons.map(person => (<p key={person.name}>{person.name} {person.number}</p>))
-  }
-  else {
-    return persons
-    .filter(person=>person.name.toLowerCase().includes(newFilter.toLowerCase()))
-    .map(person => (<p key={person.name}>{person.name} {person.number}</p>))
-  }
-}
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -22,55 +15,22 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [newFilter, setNewFilter] = useState('')
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    const copy = [...persons]
-    if (persons.find(element => element.name === newName )) {
-      alert(`${newName} is already added to phonebook`)
-    } 
-    else {
-      copy.push({
-        name: newName,
-        number: newNumber
-      })
-      setPersons(copy)
-    }
-  }
-
-
   return (
     <div>
-      <h1>Phonebook</h1>
-      <form>
-        <div>
-          filter shown with <input 
-          type="text" 
-          value={newFilter} 
-          onChange={(e)=>setNewFilter(e.target.value)}/>
-        </div>
-      </form>
-      <h2>add a new</h2>
-      <form>
-        <div>
-          name: <input 
-           type="text" 
-           value={newName} 
-           onChange={(e)=>setNewName(e.target.value)}
-            />
-        </div>
-        <div>
-          number: <input
-            type="text"
-            value={newNumber}
-            onChange={(e)=>setNewNumber(e.target.value)}
-            />
-        </div>
-        <div>
-          <button type="submit" onClick={handleSubmit}>add</button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
-      <ShowNumbers newFilter={newFilter} persons={persons}/>
+      <h2>Phonebook</h2>
+      <Filter newFilter={newFilter} setNewFilter={setNewFilter}/>
+      <h3>add a new</h3>
+      <PersonForm 
+        newName={newName}
+        setNewName={setNewName}
+        newNumber={newNumber}
+        setNewNumber={setNewNumber}
+        persons={persons}
+        setPersons={setPersons}
+      />
+      <h3>Numbers</h3>
+      <Persons newFilter={newFilter} setNewFilter={setNewFilter} persons={persons} />
+ 
     </div>
   )
 }
