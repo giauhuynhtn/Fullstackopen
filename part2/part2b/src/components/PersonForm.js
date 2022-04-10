@@ -4,16 +4,27 @@ const PersonForm = ({newName, setNewName, newNumber, setNewNumber, persons, setP
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        const copy = [...persons]
+        // const copy = [...persons]
         if (persons.find(element => element.name === newName )) {
           alert(`${newName} is already added to phonebook`)
         } 
         else {
-          copy.push({
+          const personObject = {
             name: newName,
-            number: newNumber
-          })
-          setPersons(copy)
+            number: newNumber,
+            id: persons.length + 1,
+          }
+          setPersons(persons.concat(personObject))
+          setNewName('')
+          setNewNumber('')
+        
+          console.log('button clicked', event.target)
+          // copy.push({
+          //   "name": newName,
+          //   "number": newNumber,
+          //   "id": persons.length + 1
+          // })
+          // setPersons(copy)
         }
       }
     return (
