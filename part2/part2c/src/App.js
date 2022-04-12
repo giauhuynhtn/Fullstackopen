@@ -7,6 +7,7 @@ import ShowCountries from './components/ShowCountries'
 const App = () => {
   const [countries, setCountries] = useState([])
   
+  const API_KEY=process.env.REACT_APP_API_WEATHER
   useEffect(() => {
     console.log('effect')
     axios
@@ -28,7 +29,7 @@ const App = () => {
       <div>
         find countries <input onChange={handleFilter}/>
       </div>
-      <ShowCountries countries={countries} setCountries={setCountries}/>
+      <ShowCountries countries={countries} setCountries={setCountries} api={API_KEY}/>
     </div>
   )
 }
