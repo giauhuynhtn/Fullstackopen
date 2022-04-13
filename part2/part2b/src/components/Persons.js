@@ -1,8 +1,9 @@
+
 import React from 'react'
 import personService from '../services/persons'
 
-
-const Persons = ({newFilter, persons, setPersons}) => {
+const Persons = ({newFilter, persons, setPersons, setConfirmMessage, setStyle}) => {
+  
 
   const handleClick = (id) => {
     const thisPerson = persons.find(p => p.id === id )
@@ -10,30 +11,37 @@ const Persons = ({newFilter, persons, setPersons}) => {
       personService
         .remove(id)
         .then(() => {
+          setConfirmMessage(`Deleted ${thisPerson.name}`)
+          setStyle("red")
+          setTimeout(() => {
+            setConfirmMessage(null)
+          }, 5000)
+
           return setPersons(persons.filter(person => person.id !== id))
         })
-        .catch(error => console.log('fail'))
+        .catch(error =>  console.log(error))
       } else {console.log('You cancelled to delete.')}
   }
+
 
   if (newFilter==='') {
     return persons.map(person => {
       return (
-        <p key={person.id}>
+        <li key={person.id}>
           {person.name} {person.number}
           <button onClick={()=> handleClick(person.id)}>delete</button>
-        </p>
+        </li>
       )})
   }
   else {
     return persons
       .filter(person=>person.name.toLowerCase().includes(newFilter.toLowerCase()))
-      .map(person => {
+      .map((person, index) => {
         return (
-            <p key={person.id}>
+            <li key={person.id}>
               {person.name} {person.number}
-              <button onClick={()=> handleClick(person.id)}>delete</button>
-            </p>
+              <button onClick={()=> handleClick(index)}>delete</button>
+            </li>
         )
       })
   }

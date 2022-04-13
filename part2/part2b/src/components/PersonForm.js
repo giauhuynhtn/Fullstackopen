@@ -2,7 +2,7 @@ import React from 'react'
 import personService from '../services/persons'
 
 
-const PersonForm = ({newName, setNewName, newNumber, setNewNumber, persons, setPersons}) => {
+const PersonForm = ({newName, setNewName, newNumber, setNewNumber, persons, setPersons, setConfirmMessage, setStyle}) => {
   const handleSubmit = (event) => {
       event.preventDefault()
 
@@ -13,10 +13,19 @@ const PersonForm = ({newName, setNewName, newNumber, setNewNumber, persons, setP
         personService
           .update(thisPerson.id, changedPerson)
           .then( returnedPerson => {
+            setConfirmMessage(`Updated ${newName}`)
+            setStyle('blue')
+            setTimeout(() => {
+              setConfirmMessage(null)
+            }, 5000)
             setPersons(persons.map(p => p.id !== thisPerson.id ? p : changedPerson))
           })
           .catch(error => {
-            console.log('failed');
+            setConfirmMessage(`Information of ${newName} has been removed from server`)
+            setStyle('red')
+            setTimeout(() => {
+              setConfirmMessage(null)
+            }, 5000)
           })
       } else {console.log('You cancelled to update phone number.');}}
       else {
@@ -27,6 +36,11 @@ const PersonForm = ({newName, setNewName, newNumber, setNewNumber, persons, setP
         personService
           .create(personObject)
           .then(returnedPerson => {
+            setConfirmMessage(`Added ${newName}`)
+            setStyle('green')
+            setTimeout(() => {
+              setConfirmMessage(null)
+            }, 5000)
             setPersons(persons.concat(returnedPerson))
             setNewName('')
             setNewNumber('')
