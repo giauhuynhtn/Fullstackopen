@@ -1,32 +1,39 @@
 import React from 'react'
+import personService from '../services/persons'
+
 
 const PersonForm = ({newName, setNewName, newNumber, setNewNumber, persons, setPersons}) => {
   const handleSubmit = (event) => {
       event.preventDefault()
 
-      // const copy = [...persons]
       if (persons.find(element => element.name === newName )) {
-        alert(`${newName} is already added to phonebook`)
-      } 
+        if (window.confirm(`${newName} is already added to phonebook, replace the old number with anew one?`)) {
+        const thisPerson = persons.find(p => p.name === newName)
+        const changedPerson = {...thisPerson, number: newNumber}
+        personService
+          .update(thisPerson.id, changedPerson)
+          .then( returnedPerson => {
+            setPersons(persons.map(p => p.id !== thisPerson.id ? p : changedPerson))
+          })
+          .catch(error => {
+            console.log('failed');
+          })
+      } else {console.log('You cancelled to update phone number.');}}
       else {
         const personObject = {
           name: newName,
           number: newNumber,
-          id: persons.length + 1,
         }
-        setPersons(persons.concat(personObject))
-        setNewName('')
-        setNewNumber('')
-      
-        console.log('button clicked', event.target)
-        // copy.push({
-        //   "name": newName,
-        //   "number": newNumber,
-        //   "id": persons.length + 1
-        // })
-        // setPersons(copy)
+        personService
+          .create(personObject)
+          .then(returnedPerson => {
+            setPersons(persons.concat(returnedPerson))
+            setNewName('')
+            setNewNumber('')
+          }) 
+          .catch(error => console.log('fail'))
       }
-    }
+  }
   return (
       <form>
           <div>

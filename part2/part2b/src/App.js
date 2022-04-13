@@ -1,30 +1,25 @@
 //part2 ex2.11
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import personService from './services/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newFilter, setNewFilter] = useState('')
-  
-  useEffect=(() => {
-    console.log('effect')
-    axios.get('http://localhost:3003/persons')
-      .then(response => {
-        console.log('promise fulfilled')
-        console.log(response.data);
-        setPersons(response.data)
-      })
-  },[])
-  console.log("person", persons);
-  // debugger
-  console.log('render', persons.length, 'persons')
-  
 
+  useEffect(() => {
+    personService
+      .getAll()
+      .then(initialPersons => setPersons(initialPersons))
+      .catch(error => {
+        console.log('fail');
+      })
+  },[]);
+ 
   return (
     <div>
       <h2>Phonebook</h2>
@@ -39,7 +34,7 @@ const App = () => {
         setPersons={setPersons}
       />
       <h3>Numbers</h3>
-      <Persons newFilter={newFilter} persons={persons} />
+      <Persons newFilter={newFilter} persons={persons} setPersons={setPersons}/>
     </div>
   )
 }
